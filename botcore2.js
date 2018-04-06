@@ -12,11 +12,6 @@ var xpTimer = new Stopwatch(60000);
 var usersGotXp = [];
 var userXpMultiplier = 1;
 
-var Ector = require('ector');
-var ector = new Ector();
-
-
-
 
 
 //Initialize Enamp for storing data persistantly.
@@ -85,24 +80,6 @@ client.on("message", function(message) {
 
   //Any user can run the following commands-------------------------------------------------------------------------------------------
 
-//Test if user is talking in conversation mode with bot.
-  if (content.startsWith("=")) {
-    //console.log(channel)
-    //ector.addEntry(content.substr(1));
-    //var response = ector.generateResponse();
-    //channel.send(response.sentence);
-    //Don't run any other commands.
-    //return;
-
-
-  }
-
-  //if (content.startsWith("-") == false) {
-    //ector.addEntry(content);
-  //}
-
-
-
 
   //This handles xp and stuff ==========================================================
 
@@ -118,7 +95,6 @@ client.on("message", function(message) {
 
   //Test if user already got XP for this minute. If not, give them XP.
     if (usersGotXp.includes(username) == false) {
-      //channel.send("Giving " + username + " 1 xp")
       usersGotXp.push(username);
       score.xp = (score.xp + (1 * userXpMultiplier));
 
