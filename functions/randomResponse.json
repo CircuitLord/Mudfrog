@@ -1,0 +1,97 @@
+{
+  "levelUpMsg" : [
+    "{userMention} leveled up to **Level {level}!**",
+    "Whoa! {userMention} hit **Level {level}!**",
+    "Guess who hit **Level {level}!** It's {userMention}!",
+    "Awesome! {userMention} is now **Level {level}!**",
+    "{userMention} is now **Level {level}!**"
+
+
+  ],
+
+  "exampleAdmin" : [
+    "@vinny",
+    "@CircuitLord",
+    "@Darkdragon",
+    "@Villspor",
+    "@Mee6V2"
+  ],
+
+
+  "tempbanExampleTime" : [
+    "10",
+    "30",
+    "99999",
+    "60",
+    "20"
+  ],
+
+  "tempbanExampleP1" : [
+    "Selling too many smoothies",
+    "Perm Banning",
+    "Finding smoothies",
+    "Running too slowly",
+    "Dancing badly",
+    "Lagging too much"
+  ],
+
+  "tempbanExampleP2" : [
+    "under",
+    "on top of",
+    "next to"
+  ],
+
+  "tempbanExampleP3" : [
+    "Port Olisar",
+    "a Reclaimer",
+    "Levski",
+    "an Aurora"
+  ],
+
+  "helpConfused" : [
+    "Huh? I've never heard of {command}.",
+    "What is this \"{command}\" you speak of?",
+    "wat. Idk what {command} is.",
+    "Scanning commands... {command} not detected.",
+    "Eh, too much work.",
+    "I don't think {command} exists.",
+    "ERROR 404: {command} not found.",
+    "Whoa, huge error in the console, looks like {command} wasn't found."
+  ],
+
+  "8ball" : [
+    "Nope, sorry.",
+    "It is likely.",
+    "Not a chance.",
+    "Yeah, for sure!",
+    "Hmm, it's too hard to tell now.",
+    "I can't be sure.",
+    "I have no idea.",
+    "I think so.",
+    "I doubt it.",
+    "Yep!",
+    "Nah.",
+    "Maybe.",
+    "Extremely unlikely.",
+    "That is extremely likely.",
+    "I don't know what that is.",
+    "*yawn* sorry I'm too tired right now.",
+    "Wow, huge error in the code. Not sure what went wrong there.",
+    "You know just as well as I do what I think about that.",
+    "What do you think?",
+    "Um. Yes, obviously.",
+    "Uh, No. Duh.",
+    "How am I supposed to know all this stuff?!?",
+    "I like rainbows.",
+    "Sorry, I don't know.",
+    "Sorry, I don't... Wait... I think I know. Nah, nm.",
+    "Go eat a cookie then tell me that again.",
+    "Wow, way to put me on the spot here. Um, I say, uh, yes.",
+    "Wow, way to put me on the spot here. Um, I say, uh, no."
+  ]
+
+
+
+
+
+}
