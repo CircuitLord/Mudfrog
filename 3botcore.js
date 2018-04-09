@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
-const xp = require("./functions/xp.js");
+const utils = require("./functions/circuit-utils.js");
 
 var usersGotXP = [];
 
@@ -50,19 +50,28 @@ client.on("message", function(message) {
         
         isCommand = true;
     }
-    //console.log(xp.fetchStats(userDatabaseID))
 
-    if (usersGotXP.includes(userDatabaseID) == false && xp.fetchStats(userDatabaseID) == null) {
-        xp.addNewUser(userID, username, guildID, userDatabaseID);
+    if (usersGotXP.includes(userDatabaseID) == false && utils.fetchStats(userDatabaseID) == null) {
+        utils.addNewUser(userID, username, guildID, userDatabaseID);
         console.log("New user.")
-        return;
     }
 
     if (usersGotXP.includes(userDatabaseID) == false && isCommand == false) {
         console.log("Giving xp")
-        //Update user XP, and test if they leveled up.
-        var leveledUp = xp.update(userDatabaseID);
+    //Update user XP, and test if they leveled up.
+        var leveledUp = utils.updateXP(userDatabaseID);
+
+        if (leveledUp[0] == true) {
+
+            var response = randomResponse.run("levelUpMsg");
+            response = response.replace("{userMention}", "<@" + userID + ">");
+            response = response.replace("{level}", leveledUp[1]);
+    
+            channel.send(response);
+        }
         //usersGotXP.push(userDatabaseID);
+
+
     }
 
 
@@ -79,9 +88,30 @@ client.on("message", function(message) {
 
 
     if (command.match("levels")) {
+       // channel.startTyping();
         var levels = require("./commands/levels3.js");
         var response = levels.run(guildID);
+       // ai.typingTime(response);
+       // channel.stopTyping();
         channel.send(response);
+
+
+
+    }
+
+
+
+
+    if (command.match("8")) {
+       // channel.startTyping();
+       // var response = randomResponse.run("8ball");
+
+
+        //setTimeout(() => {
+        //    channel.send(response);
+       //     channel.stopTyping();
+        //}, response.length * 40);
+
 
 
     }

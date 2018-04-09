@@ -4,18 +4,14 @@
     "Whoa! {userMention} hit **Level {level}!**",
     "Guess who hit **Level {level}!** It's {userMention}!",
     "Awesome! {userMention} is now **Level {level}!**",
-    "{userMention} is now **Level {level}!**"
+    "{userMention} is now **Level {level}!**",
+    "{userMention} hit **Level {level}!**",
+    "{userMention} obtained **Level {level}!**"
 
 
   ],
 
-  "exampleAdmin" : [
-    "@vinny",
-    "@CircuitLord",
-    "@Darkdragon",
-    "@Villspor",
-    "@Mee6V2"
-  ],
+
 
 
   "tempbanExampleTime" : [

@@ -1,6 +1,6 @@
-const enmap = require("../enmap/enmap.js");
 const Discord = require("discord.js");
 const json = require("json-file");
+const utils = require("../functions/circuit-utils.js");
 
 const levelConfig = json.read("./levelConfig.json");
 
@@ -16,7 +16,7 @@ module.exports.helpDesc = new Discord.RichEmbed()
 
 exports.getRank = (userDatabaseID, guildID, userAvatar) => {
  
-    var userDatabase = enmap.get(userDatabaseID);
+    var userDatabase = utils.eGet(userDatabaseID);
 
     var userXP = userDatabase.xp;
     var userID = userDatabase.userID;
@@ -32,7 +32,7 @@ exports.getRank = (userDatabaseID, guildID, userAvatar) => {
 
     
 
-    var users = enmap.mapUsersServer(guildID).sort(compare);
+    var users = utils.mapUsersServer(guildID).sort(compare);
 
     var userRanking;
 
@@ -40,6 +40,7 @@ exports.getRank = (userDatabaseID, guildID, userAvatar) => {
 
         if (user.userID == undefined) {
             console.log("User is undefined.")
+            return;
         }
 
         if (user.userID == userID) {

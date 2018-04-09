@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const enmap = require("../enmap/enmap.js");
+const utils = require("../functions/circuit-utils.js");
 
 
 module.exports.helpDesc = new Discord.RichEmbed()
@@ -20,7 +20,7 @@ exports.run = (guildID) => {
         else return 0;
     }
 
-    var users = enmap.mapUsersServer(guildID).sort(compare);
+    var users = utils.mapUsersServer(guildID).sort(compare);
 
     var firstPlace = (users[0].username + ": Lvl: " + users[0].level + " XP: " + users[0].xp);
 
@@ -40,8 +40,6 @@ exports.run = (guildID) => {
     .addField("First Place:", firstPlace, false)
     .addField("Second Place:", secondPlace, false)
     .addField("Third Place:", thirdPlace, false)
-    //.addField("Ranking:", userRanking, true)
-    //.addField("Level Progess:", "**Lvl. " + users[userSpot].level + "** " + progressBar + " **Lvl. " + (users[userSpot].level + 1) + "**", true)
     .setColor(0x428ef4);
 
 
