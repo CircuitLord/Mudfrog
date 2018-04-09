@@ -24,7 +24,6 @@ client.on("ready", function(message) {
 
 function xpTimer() {
     usersGotXP = [];
-    console.log("xpTimer resetting")
     setTimeout(xpTimer, 60000);
 }
 
@@ -61,7 +60,8 @@ client.on("message", function(message) {
 
     if (usersGotXP.includes(userDatabaseID) == false && isCommand == false) {
         console.log("Giving xp")
-        xp.update(userDatabaseID);
+        //Update user XP, and test if they leveled up.
+        var leveledUp = xp.update(userDatabaseID);
         //usersGotXP.push(userDatabaseID);
     }
 
@@ -80,6 +80,8 @@ client.on("message", function(message) {
 
     if (command.match("levels")) {
         var levels = require("./commands/levels3.js");
+        var response = levels.run(guildID);
+        channel.send(response);
 
 
     }

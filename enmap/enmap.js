@@ -12,18 +12,6 @@ exports.get = (key) => {
     return enmap.get(key);
 }
 
-exports.map = () => {
-    var foo = enmap.map(function(fooo) {
-        return fooo;
-    
-      });
-
-      return foo;
-    
-
-
-
-}
 
 exports.mapUsersServer = (guildID) => {
 

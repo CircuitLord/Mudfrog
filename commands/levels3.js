@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const enmap = require("../enmap/enmap.js");
 
 
 module.exports.helpDesc = new Discord.RichEmbed()
@@ -11,13 +12,40 @@ module.exports.helpDesc = new Discord.RichEmbed()
 
 
 
-exports.run = (client, message) => {
+exports.run = (guildID) => {
+
+    function compare(a, b) {
+        if (a.xp < b.xp) return 1;
+        if (a.xp > b.xp) return -1
+        else return 0;
+    }
+
+    var users = enmap.mapUsersServer(guildID).sort(compare);
+
+    var firstPlace = (users[0].username + ": Lvl: " + users[0].level + " XP: " + users[0].xp);
+
+    var secondPlace = "_none_";
+    if (users[1] != null) secondPlace = (users[1].username + ": Lvl: " + users[1].level + " XP: " + users[1].xp);
+
+    var thirdPlace = "_none_";
+    if (users[2] != null) thirdPlace = (users[2].username + ": Lvl: " + users[2].level + " XP: " + users[2].xp);
+
+    
 
 
 
+    const levelsRE = new Discord.RichEmbed()
+    .setAuthor("User Rankings:")
+    //.setThumbnail(message.author.avatarURL)
+    .addField("First Place:", firstPlace, false)
+    .addField("Second Place:", secondPlace, false)
+    .addField("Third Place:", thirdPlace, false)
+    //.addField("Ranking:", userRanking, true)
+    //.addField("Level Progess:", "**Lvl. " + users[userSpot].level + "** " + progressBar + " **Lvl. " + (users[userSpot].level + 1) + "**", true)
+    .setColor(0x428ef4);
 
 
-
+    return levelsRE;
 
 
 
