@@ -30,7 +30,13 @@ exports.addNewUser = (userID, username, guildID, userDatabaseID) => {
 
 
 exports.fetchStats = (userDatabaseID) => {
-    return enmap.get(userDatabaseID);
+    try {
+       var stats = enmap.get(userDatabaseID);
+       return stats;
+    }
+    catch(err) {
+        console.log("User does not exist, adding.")
+    }
 }
 
 
