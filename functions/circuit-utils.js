@@ -1,6 +1,20 @@
 const json = require("json-file");
 
 
+//Misc
+
+exports.genRandomWhole = (min, max) => {
+    return Math.random() * (min - max) + min;
+}
+
+exports.genRandomTest = (max) => {
+    var number = Math.floor(Math.random() * max);
+    console.log(number)
+    if (number == 0) return true;
+    else return false;
+    
+}
+
 
 //Enmap part of utils -------------------------------------------------------------------------------------
 

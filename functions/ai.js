@@ -1,9 +1,27 @@
+//Handles all AI parts of Mudfrog
+
+const Discord = require("discord.js");
+
+const utils = require("./circuit-utils.js");
+
+
+
+exports.sendAI = (message, args, command, response) => {
+
+    var num = utils.genRandomTest(3);
+
+    console.log(num)
+ 
 
 
 
 
+}
 
 
+
+
+exports. 
 
 
 
@@ -16,6 +34,3 @@ exports.typingTime = (response) => {
 }
 
 
-exports.genRandomWhole = (min, max) => {
-    return Math.random() * (min - max) + min;
-}

@@ -4,6 +4,8 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 const utils = require("./functions/circuit-utils.js");
+const randomResponse = require("./functions/randomResponse.js");
+const ai = require("./functions/ai.js")
 
 var usersGotXP = [];
 
@@ -31,6 +33,7 @@ function xpTimer() {
 
 client.on("message", function(message) {
     if (message.author.bot == true) return;
+    if (message.channel.type === "dm") return;
     
 
     const username = message.author.username;
@@ -42,10 +45,11 @@ client.on("message", function(message) {
     const userDatabaseID = (guildID + "-" + userID);
 
     var command = "";
-
     var isCommand = false;
+    var args = "";
+
     if (content.startsWith("-")) {
-        const args = message.content.slice(1).trim().split(/ +/g);
+        args = message.content.slice(1).trim().split(/ +/g);
         command = args.shift().toLowerCase();
         
         isCommand = true;
@@ -53,7 +57,8 @@ client.on("message", function(message) {
 
     if (usersGotXP.includes(userDatabaseID) == false && utils.fetchStats(userDatabaseID) == null) {
         utils.addNewUser(userID, username, guildID, userDatabaseID);
-        console.log("New user.")
+        console.log("New user.");
+        return;
     }
 
     if (usersGotXP.includes(userDatabaseID) == false && isCommand == false) {
@@ -80,16 +85,32 @@ client.on("message", function(message) {
 
 
     if (command.match("rank")) {
-        var rank = require("./commands/rank3.js");
+        var rank = require("./commands/rank.js");
         var response = rank.getRank(userDatabaseID, guildID, message.author.avatarURL);
         channel.send(response);
         
     }
 
 
+    if (command.match("vote")) {
+        var commandFile = require("./commands/vote.js");
+        commandFile.run(client, message);
+    }
+
+    if (command.match("ai")) {
+        var response = "This is a test message."
+        ai.sendAI(channel, args, command, response);
+    }
+
+    if (command.match("help")) {
+        var commandFile = require("./commands/help.js");
+        commandFile.run(client, message, args);
+    }
+
+
     if (command.match("levels")) {
        // channel.startTyping();
-        var levels = require("./commands/levels3.js");
+        var levels = require("./commands/levels.js");
         var response = levels.run(guildID);
        // ai.typingTime(response);
        // channel.stopTyping();
@@ -102,15 +123,16 @@ client.on("message", function(message) {
 
 
 
+
     if (command.match("8")) {
-       // channel.startTyping();
-       // var response = randomResponse.run("8ball");
+        channel.startTyping();
+        var response = randomResponse.run("8ball");
 
 
-        //setTimeout(() => {
-        //    channel.send(response);
-       //     channel.stopTyping();
-        //}, response.length * 40);
+        setTimeout(() => {
+            channel.send(response);
+            channel.stopTyping();
+        }, response.length * 40);
 
 
 
