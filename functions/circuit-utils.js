@@ -1,10 +1,15 @@
 const json = require("json-file");
+const Discord = require("discord.js");
 
 
 //Misc
 
 exports.genRandomWhole = (min, max) => {
     return Math.random() * (min - max) + min;
+}
+
+exports.getRandomArray = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
 }
 
 exports.genRandomTest = (max) => {
@@ -14,6 +19,18 @@ exports.genRandomTest = (max) => {
     else return false;
     
 }
+
+
+//Returns random user from that server.
+exports.getRandomUser = (message) => {
+    var userIDs = message.guild.members.map ((val, index, arr) => {
+        return val.user.username;
+    });
+    return exports.getRandomArray(userIDs);
+}
+
+
+
 
 
 //Enmap part of utils -------------------------------------------------------------------------------------

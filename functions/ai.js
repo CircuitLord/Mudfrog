@@ -21,8 +21,6 @@ exports.sendAI = (message, args, command, response) => {
 
 
 
-exports. 
-
 
 
 

@@ -8,6 +8,7 @@ const randomResponse = require("./functions/randomResponse.js");
 const ai = require("./functions/ai.js")
 
 var usersGotXP = [];
+var usersExist = [];
 
 
 
@@ -55,12 +56,16 @@ client.on("message", function(message) {
         isCommand = true;
     }
 
-    if (usersGotXP.includes(userDatabaseID) == false && utils.fetchStats(userDatabaseID) == null) {
+    //Test if user exists in loaded memory, then test if they exist in database. If none, create a new one with the template.
+    if (usersExist.includes(userDatabaseID) == false) {
+        if (utils.fetchStats(userDatabaseID) == null) {
         utils.addNewUser(userID, username, guildID, userDatabaseID);
         console.log("New user.");
-        return;
+        usersExist.push(userDatabaseID);
+        }
     }
 
+    //Give a user XP if they haven't got any that minute and they aren't using a command.
     if (usersGotXP.includes(userDatabaseID) == false && isCommand == false) {
         console.log("Giving xp")
     //Update user XP, and test if they leveled up.
@@ -99,7 +104,8 @@ client.on("message", function(message) {
 
     if (command.match("ai")) {
         var response = "This is a test message."
-        ai.sendAI(channel, args, command, response);
+        console.log(utils.getRandomUser(message))
+        //ai.sendAI(channel, args, command, response);
     }
 
     if (command.match("help")) {
