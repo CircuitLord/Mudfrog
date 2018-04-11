@@ -4,14 +4,17 @@ const Discord = require("discord.js");
 
 //Misc
 
+//Generates a random whole number between the min and max.
 exports.genRandomWhole = (min, max) => {
     return Math.random() * (min - max) + min;
 }
 
+//Gets random item from array.
 exports.getRandomArray = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 }
 
+//Returns true or false, max number changes the chance of true.
 exports.genRandomTest = (max) => {
     var number = Math.floor(Math.random() * max);
     console.log(number)
@@ -40,14 +43,17 @@ const EnmapLevel = require('enmap-level');
 
 var enmap = new e({ provider: new EnmapLevel({ name: 'serverUsersDB' }) });
 
+//Sets a value in the databse.
 exports.eSet = (key, value) => {
     enmap.set(key, value);
 }
 
+//Gets a value in the database.
 exports.eGet = (key) => {
     return enmap.get(key);
 }
 
+//Maps all of a server's users for easy access.
 exports.mapUsersServer = (guildID) => {
     var users = enmap.map ((val, index, arr) => {
         if (index.startsWith(guildID)) {
