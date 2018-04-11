@@ -33,6 +33,7 @@ exports.getRank = (userDatabaseID, guildID, userAvatar) => {
     
 
     var users = utils.mapUsersServer(guildID).sort(compare);
+    console.log(guildID)
 
     var userRanking;
 

@@ -5,12 +5,62 @@ const Discord = require("discord.js");
 const utils = require("./circuit-utils.js");
 
 
+//Import commands:
+const rank = require("../commands/rank.js");
 
-exports.sendAI = (message, args, command, response) => {
+
+
+exports.sendAI = async (client, message, args, command, response) => {
+    const username = message.author.username;
+    const guildID = message.guild.id.toString();
+    const userID = message.author.id.toString();
+    const content = message.content;
+    const channel = message.channel;
+
+    const userDatabaseID = (guildID + "-" + userID);
+    console.log(userDatabaseID)
 
     var num = utils.genRandomTest(3);
+    
 
-    console.log(num)
+
+    if (utils.genRandomTest(0) == true) {
+        var randomUserID = utils.getRandomUserID(message);
+
+
+        var user = await client.fetchUser(randomUserID);
+
+
+
+
+        var fakeResponse = rank.getRank(guildID + "-" + user.id, guildID, user.avatarURL);
+        console.log(fakeResponse)
+
+        channel.send(fakeResponse).then(function(message) {
+            setTimeout(() => {
+                channel.send("Oh, my bad, wrong person.");
+                //message.delete()
+                setTimeout(() => {
+
+                    //message.delete();
+                    message.edit(response)
+                }, 2000);
+                //message.channel.send(response)
+            }, 3000);
+        })
+
+
+
+
+        
+
+        
+
+
+
+    }
+
+    
  
 
 

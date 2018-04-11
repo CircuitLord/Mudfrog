@@ -104,8 +104,8 @@ client.on("message", function(message) {
 
     if (command.match("ai")) {
         var response = "This is a test message."
-        console.log(utils.getRandomUser(message))
-        //ai.sendAI(channel, args, command, response);
+        //console.log(utils.getRandomUser(message))
+        ai.sendAI(client, message, args, command, response);
     }
 
     if (command.match("help")) {

@@ -17,7 +17,6 @@ exports.getRandomArray = (array) => {
 //Returns true or false, max number changes the chance of true.
 exports.genRandomTest = (max) => {
     var number = Math.floor(Math.random() * max);
-    console.log(number)
     if (number == 0) return true;
     else return false;
     
@@ -25,9 +24,9 @@ exports.genRandomTest = (max) => {
 
 
 //Returns random user from that server.
-exports.getRandomUser = (message) => {
+exports.getRandomUserID = (message) => {
     var userIDs = message.guild.members.map ((val, index, arr) => {
-        return val.user.username;
+        return val.user.id;
     });
     return exports.getRandomArray(userIDs);
 }
