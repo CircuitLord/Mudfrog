@@ -34,6 +34,21 @@ function xpTimer() {
 }
 
 
+client.on("messageReactionAdd", function(messageReaction, user) {
+    if (user.bot == true) return;
+
+    if (messageReaction.message.author.id !== "431931208264581150");
+    var home = require("./commands/home.js");
+
+    const messageID = messageReaction.message.id;
+
+
+    home.newReaction(messageReaction, user);
+ 
+ 
+ });
+
+
 
 client.on("message", function(message) {
     if (message.author.bot == true) return;
@@ -126,6 +141,7 @@ client.on("message", function(message) {
 
     if (command.match("home")) {
         var commandFile = require("./commands/home.js");
+        commandFile.initHomeScreen(message);
         
     }
 

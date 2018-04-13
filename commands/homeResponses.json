@@ -1,0 +1,62 @@
+{
+    "home" : {
+        "welcome" : [
+          "Welcome, {user}!",
+          "Hey there, {user}!",
+          "What's up, {user}?",
+          "How can I help you, {user}?",
+          "Hey {user}!"
+        ],
+      
+
+      "commandsDesc" : [
+        "Use fancy words to make me do cool things!",
+        "This is where the magic happens.",
+        "The best part.",
+        "`-permban {user} 200d this is not an example`",
+        "Go here, it's cool.",
+        "Lots of complex commands for you to enjoy."
+
+      ],
+
+      "optionsDesc" : [
+          "Break all my settings here.",
+          "Tweak everything to your desire.",
+          "Opening this voids your warrenty.",
+          "ERROR 404, optionsDesc not found",
+          "Wait, they can change my settings?"
+      ]
+
+    },
+
+
+
+    "commands" : {
+      
+      "adminCommandsDesc" : [
+        "The cool people place.",
+        "Use these to destroy the server.",
+        "Someone annoying you? You've come to the right place.",
+        "Commands to ruin other people's lives."
+      ]
+
+      
+
+
+
+    },
+
+    "options" : {
+      
+      "moduleSettingsDesc" : [
+        "Enable or disable built-in modules of Mudfrog.",
+        "Go here to turn on and off built-in Mudfrog modules."
+      ]
+
+    }
+
+
+
+
+
+}

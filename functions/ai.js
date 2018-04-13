@@ -4,6 +4,9 @@ const Discord = require("discord.js");
 
 const utils = require("./circuit-utils.js");
 
+const json = require("json-file")
+const randomResponse = json.read("./functions/randomResponse.json")
+
 
 //Import commands:
 const rank = require("../commands/rank.js");
@@ -82,3 +85,19 @@ exports.typingTime = (response) => {
 }
 
 
+
+
+exports.rr = (responseType) => {
+
+  var responseArray = randomResponse.get(responseType.toString());
+
+  var response = responseArray[Math.floor(Math.random() * responseArray.length)];
+
+  //var userMention = ("<@" + message.author.id + ">")
+
+
+
+  return response;
+
+
+}
