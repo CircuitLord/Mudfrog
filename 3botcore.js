@@ -4,11 +4,14 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 const utils = require("./functions/circuit-utils.js");
-const randomResponse = require("./functions/randomResponse.js");
 const ai = require("./functions/ai.js")
+const fs = require('fs');
+const json = require("json-file");
 
 var usersGotXP = [];
 var usersExist = [];
+var serverConfig;
+var serverConfigs = [];
 
 
 
@@ -49,6 +52,11 @@ client.on("message", function(message) {
     var isCommand = false;
     var args = "";
 
+
+
+
+
+    //Test if message is a command, if so, set isCommand to true.
     if (content.startsWith("-")) {
         args = message.content.slice(1).trim().split(/ +/g);
         command = args.shift().toLowerCase();
@@ -72,20 +80,54 @@ client.on("message", function(message) {
         var leveledUp = utils.updateXP(userDatabaseID);
 
         if (leveledUp[0] == true) {
+            var resonse = "Someone leveled up."
 
-            var response = randomResponse.run("levelUpMsg");
-            response = response.replace("{userMention}", "<@" + userID + ">");
-            response = response.replace("{level}", leveledUp[1]);
+            //var response = randomResponse.run("levelUpMsg");
+            //response = response.replace("{userMention}", "<@" + userID + ">");
+            //response = response.replace("{level}", leveledUp[1]);
     
             channel.send(response);
         }
         //usersGotXP.push(userDatabaseID);
+
+        return;
 
 
     }
 
 
 
+    //Load server config.
+
+
+    //If server config doesn't exist, make it.
+    if (fs.existsSync("./serverConfigs/" + guildID + ".json") == false) {
+        const defaultConfig = require("./serverConfigTemplate.json")
+        //fs.writeFile("./serverConfigs/" + guildID + ".json", defaultConfig);
+
+        fs.writeFileSync("./serverConfigs/" + guildID + ".json", JSON.stringify(require("./serverConfigTemplate.json")), 'utf8', function (err) {
+            if (err) {
+                console.log("An error occured while writing JSON Object to File.");
+                return console.log(err);
+            }
+        });
+
+        serverConfig = json.read("./serverConfigs/" + guildID + ".json");
+        serverConfig.set("guildID", guildID);
+        serverConfig.writeSync()
+
+
+
+    }
+
+
+    serverConfig = json.read("./serverConfigs/" + guildID + ".json");
+
+
+    if (command.match("home")) {
+        var commandFile = require("./commands/home.js");
+        
+    }
 
 
 
