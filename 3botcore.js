@@ -11,7 +11,8 @@ const json = require("json-file");
 var usersGotXP = [];
 var usersExist = [];
 var serverConfig;
-var serverConfigs = [];
+
+var serverConfigs = {};
 
 
 
@@ -68,11 +69,43 @@ client.on("message", function(message) {
     var args = "";
 
 
+    //Test if server config is loaded in memory.
+    if (serverConfigs[guildID] === undefined) {
+        console.log("Loading config.")
+        //Test if config exists at all.
+        if (fs.existsSync("./serverConfigs/" + guildID + ".json") == false) {
+            const defaultConfig = require("./serverConfigTemplate.json")
+    
+            fs.writeFileSync("./serverConfigs/" + guildID + ".json", JSON.stringify(require("./serverConfigTemplate.json")), 'utf8', function (err) {
+                if (err) {
+                    console.log("An error occured while writing JSON Object to File.");
+                    return console.log(err);
+                }
+            });
+
+
+            serverConfig = json.read("./serverConfigs/" + guildID + ".json");
+            serverConfig.set("guildID", guildID);
+            serverConfig.writeSync()
+    
+    
+
+
+        }
+
+        var serverConfig = require("./serverConfigs/" + guildID + ".json");
+        serverConfigs[guildID] = serverConfig;
+
+
+    }
+
+    //Get the prefix for that server.
+    const prefix = serverConfigs[guildID].botPrefix;
 
 
 
     //Test if message is a command, if so, set isCommand to true.
-    if (content.startsWith("-")) {
+    if (content.startsWith(prefix)) {
         args = message.content.slice(1).trim().split(/ +/g);
         command = args.shift().toLowerCase();
         
@@ -138,6 +171,12 @@ client.on("message", function(message) {
 
     serverConfig = json.read("./serverConfigs/" + guildID + ".json");
 
+    
+
+
+
+
+
 
     if (command.match("home")) {
         var commandFile = require("./commands/home.js");
@@ -145,15 +184,12 @@ client.on("message", function(message) {
         
     }
 
-
-
     if (command.match("rank")) {
         var rank = require("./commands/rank.js");
         var response = rank.getRank(userDatabaseID, guildID, message.author.avatarURL);
         channel.send(response);
         
     }
-
 
     if (command.match("vote")) {
         var commandFile = require("./commands/vote.js");
@@ -171,7 +207,6 @@ client.on("message", function(message) {
         commandFile.run(client, message, args);
     }
 
-
     if (command.match("levels")) {
        // channel.startTyping();
         var levels = require("./commands/levels.js");
@@ -183,10 +218,6 @@ client.on("message", function(message) {
 
 
     }
-
-
-
-
 
     if (command.match("8")) {
         channel.startTyping();

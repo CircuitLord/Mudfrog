@@ -38,6 +38,28 @@
         "Use these to destroy the server.",
         "Someone annoying you? You've come to the right place.",
         "Commands to ruin other people's lives."
+      ],
+
+      "automationCommandsDesc" : [
+        "Commands like -vote, to make your life cooler and easier.",
+        "Are you lazy or just want a better way to do stuff? Go here.",
+        "For the lazy ones.",
+        "Because we can."
+      ],
+
+      "memeCommandsDesc" : [
+        "The funny, pointless commands that don't fit anywhere else.",
+        "lol",
+        "Useless commands.",
+        "For all the bad commands.",
+        "This was a huge mistake..."
+      ],
+
+      "miscCommandsDesc" : [
+        "For the commands too small for their own catagory.",
+        "Random commands and stuff.",
+        "Leftovers from the other catagories.",
+        "Who knows what's in here?"
       ]
 
       
@@ -45,6 +67,29 @@
 
 
     },
+
+
+
+    "memeCommands" : {
+      
+      "permbanDesc" : [
+        "The best command on Mudfrog.",
+        "Legends tell of this command...",
+        "PERMBANS everyone on your server. (jk)",
+        "The greatest command of all time."
+      ]
+
+      
+
+
+
+
+
+    },
+      
+
+
+    
 
     "options" : {
       

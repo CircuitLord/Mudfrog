@@ -4,6 +4,8 @@
 
     "adminBotChannel" : "",
 
+    "botPrefix" : "-",
+
     "admins" : [
 
     ],

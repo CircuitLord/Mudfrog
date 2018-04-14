@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const ai = require("../functions/ai.js")
 const utils = require("../functions/circuit-utils.js");
 const home = require("./homeResponses.json")
-
+const config = require("../config.json");
 
 
 
@@ -40,7 +40,7 @@ exports.initHomeScreen = (message) => {
         }
 
         await message.react("🏠");
-        await message.react("◀")
+        await message.react("⬅")
         await message.react("\u0031\u20e3");
         await message.react("\u0032\u20e3");
         await message.react("\u0033\u20e3");
@@ -81,7 +81,7 @@ exports.newReaction = (messageReaction, user) => {
 
 
     if (activeHomes[messageID] === null) return;
-
+    console.log(reaction)
     messageReaction.remove(user);
 
 
@@ -100,21 +100,27 @@ exports.newReaction = (messageReaction, user) => {
         return;
     }
 
-    if (reaction == "◀") {
+    if (reaction == "⬅") {
         console.log("back")
         console.log(activeHomes[messageID].state)
 
 
-        if (activeHomes[messageID].state = "home-commands") {
+        if (activeHomes[messageID].state === "home-commands") {
             
             message.edit(exports.homeScreen(user.username));
             activeHomes[messageID].state = "home"
             return;
         }
 
-        if (activeHomes[messageID].state = "home-options") {
+        if (activeHomes[messageID].state === "home-options") {
             message.edit(exports.homeScreen(user.username));
             activeHomes[messageID].state = "home"
+            return;
+        }
+
+        if (activeHomes[messageID].state === "home-commands-memeCommands") {
+            message.edit(exports.commandsScreen(messageID));
+            activeHomes[messageID].state = "home-commands"
             return;
         }
 
@@ -131,6 +137,33 @@ exports.newReaction = (messageReaction, user) => {
         }
 
         if (reaction == "2⃣") {
+            message.edit(exports.optionsScreen(messageID));
+            return;
+        }
+
+
+
+    }
+
+    else if (activeHomes[messageID].state == "home-commands") {
+
+        //1
+        if (reaction == "1⃣") {
+            message.edit(exports.commandsScreen(messageID));
+            return;
+        }
+
+        if (reaction == "2⃣") {
+            message.edit(exports.optionsScreen(messageID));
+            return;
+        }
+
+        if (reaction == "3⃣") {
+            message.edit(exports.memeCommandsScreen(messageID));
+            return;
+        }
+
+        if (reaction == "4⃣") {
             message.edit(exports.optionsScreen(messageID));
             return;
         }
@@ -165,14 +198,14 @@ exports.commandsScreen = (messageID) => {
     .setAuthor("Commands:")
     .setColor(0x00AE86)
     .addField("1: Admin Commands", utils.getRandomArray(home.commands.adminCommandsDesc))
-    
 
-    //.addField("2: Options", utils.getRandomArray(home.home.optionsDesc), true)
-    .addField("2: example0", "Cool description", false)
-    .addField("3: example1", "Cool description", false)
-    .addField("4: example2", "Cool description", false)
-    .addField("5: example3", "Cool description", false)
-    .addField("6: example4", "Cool description", false)
+
+    .addField("2: Automation Commands", utils.getRandomArray(home.commands.automationCommandsDesc))
+    .addField("3: Meme Commands", utils.getRandomArray(home.commands.memeCommandsDesc))
+    .addField("4: Misc. Commands", utils.getRandomArray(home.commands.miscCommandsDesc))
+    .addBlankField(false)
+    .addBlankField(false)
+    .addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion +" - developed by CircuitLord_");
 
     return reCommandsScreen;
 
@@ -188,11 +221,12 @@ exports.optionsScreen = (messageID) => {
     
 
     //.addField("2: Options", utils.getRandomArray(home.home.optionsDesc), true)
-    .addField("2: example0", "Cool description", false)
-    .addField("3: example1", "Cool description", false)
-    .addField("4: example2", "Cool description", false)
-    .addField("5: example3", "Cool description", false)
-    .addField("6: example4", "Cool description", false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion +" - developed by CircuitLord_");
 
     return reCommandsScreen;
 
@@ -209,13 +243,36 @@ exports.homeScreen = (username) => {
 
     .addField("2: Options", utils.getRandomArray(home.home.optionsDesc), false)
 
-    .addField("3: example1", "Cool description", false)
-    .addField("4: example2", "Cool description", false)
-    .addField("5: example3", "Cool description", false)
-    .addField("6: example4", "Cool description", false)
+
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    
+    .addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion +" - developed by CircuitLord_");
 
     return reHomeScreen;
 
+
+
+}
+
+exports.memeCommandsScreen = (messageID) => {
+    activeHomes[messageID].state = "home-commands-memeCommands"
+    const reCommandsScreen = new Discord.RichEmbed()
+    .setAuthor("Meme Commands:")
+    .setColor(0x00AE86)
+    .addField("1: PERMBAN", utils.getRandomArray(home.memeCommands.permbanDesc))
+
+
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addBlankField(false)
+    .addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion +" - developed by CircuitLord_");
+
+    return reCommandsScreen;
 
 
 }
