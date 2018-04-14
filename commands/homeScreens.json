@@ -1,0 +1,287 @@
+{
+
+
+    "home" : {
+        "path" : "home",
+        "title" : [
+            "Welcome, {user}!",
+            "Hey there, {user}!",
+            "What's up, {user}?",
+            "How can I help you, {user}?",
+            "Hey {user}!"
+        ],
+
+        "opt1" : {
+            "name" : "1: Commands",
+            "dest" : "commands",
+            "descs" : [
+                "Use fancy words to make me do cool things!",
+                "This is where the magic happens.",
+                "The best part.",
+                "`-permban {user} 200d this is not an example`",
+                "Go here, it's cool.",
+                "Lots of complex commands for you to enjoy."
+            ]
+        },
+
+        "opt2" : {
+            "name" : "2: Options",
+            "dest" : "options",
+            "descs" : [
+                "Break all my settings here.",
+                "Tweak everything to your desire.",
+                "Opening this voids your warrenty.",
+                "ERROR 404, optionsDesc not found",
+                "Wait, they can change my settings?"
+            ]
+        },
+
+
+        "opt3" : {
+            "name" : "blank",
+            "descs" : [
+                "Use fancy words to make me do cool things!",
+                "This is where the magic happens.",
+                "The best part.",
+                "`-permban {user} 200d this is not an example`",
+                "Go here, it's cool.",
+                "Lots of complex commands for you to enjoy."
+            ]
+        },
+
+        "opt4" : {
+            "name" : "blank",
+            "descs" : [
+
+            ]
+        },
+
+        "opt5" : {
+            "name" : "blank",
+            "descs" : [
+
+            ]
+        },
+
+        "opt6" : {
+            "name" : "blank",
+            "descs" : [
+
+            ]
+        }
+
+
+
+    },
+
+
+
+    "commands" : {
+        "path" : "home-commands",
+        "title" : [
+            "Commands"
+        ],
+
+        "opt1" : {
+            "name" : "1: Admin Commands",
+            "dest" : "commandsAdmin",
+            "descs" : [
+                "The cool people place.",
+                "Use these to destroy the server.",
+                "Someone annoying you? You've come to the right place.",
+                "Commands to ruin other people's lives."
+            ]
+        },
+
+        "opt2" : {
+            "name" : "2: Automation Commands",
+            "dest" : "commandsAutomation",
+            "descs" : [
+                "Commands like -vote, to make your life cooler and easier.",
+                "Are you lazy or just want a better way to do stuff? Go here.",
+                "For the lazy ones.",
+                "Because we can."
+            ]
+        },
+
+
+        "opt3" : {
+            "name" : "3: Meme Commands",
+            "dest" : "commandsMeme",
+            "descs" : [
+                "The funny, pointless commands that don't fit anywhere else.",
+                "lol",
+                "Useless commands.",
+                "For all the bad commands.",
+                "This was a huge mistake..."
+            ]
+        },
+
+        "opt4" : {
+            "name" : "4: Misc. Commands",
+            "dest" : "commandsMisc",
+            "descs" : [
+                "For the commands too small for their own catagory.",
+                "Random commands and stuff.",
+                "Leftovers from the other catagories.",
+                "Who knows what's in here?"
+            ]
+        },
+
+        "opt5" : {
+            "name" : "blank",
+            "descs" : [
+
+            ]
+        },
+
+        "opt6" : {
+            "name" : "blank",
+            "descs" : [
+
+            ]
+        }
+
+
+
+
+
+    },
+
+    
+    "options" : {
+        "path" : "home-options",
+        "title" : [
+            "Options:"
+        ],
+
+        "opt1" : {
+            "name" : "1: Change Module Settings",
+            "dest" : "optionsModuleSettings",
+            "descs" : [
+                "Enable or disable built-in modules of Mudfrog.",
+                "Go here to turn on and off built-in Mudfrog modules."
+            ]
+        },
+
+        "opt2" : {
+            "name" : "2: Mudfrog Settings",
+            "dest" : "optionsMudfrogSettings",
+            "descs" : [
+                "You can break me here.",
+                "Opening this voids your second warrenty.",
+                "Change all the things exactly how you want."
+            ]
+        },
+
+
+        "opt3" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        },
+
+        "opt4" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        },
+
+        "opt5" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        },
+
+        "opt6" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        }
+
+
+    },
+
+
+
+
+    "commandsAdmin" : {
+        "path" : "home-commands-commandsAdmin",
+        "title" : [
+            "Admin Commands:"
+        ],
+
+        "opt1" : {
+            "name" : "1: Mute",
+            "dest" : "commandsAdminMute",
+            "descs" : [
+                "Make someone be quiet.",
+                "Takes away a user's voice.",
+                "For the annoying ones."
+            ]
+        },
+
+        "opt2" : {
+            "name" : "2: Ban",
+            "dest" : "commandsAdminBan",
+            "descs" : [
+                "Remove people with _style_.",
+                "Better than the discord interface.",
+                "Get off my server."
+            ]
+        },
+
+
+        "opt3" : {
+            "name" : "3: Warn",
+            "dest" : "commandsAdminWarn",
+            "descs" : [
+                "Saves you two clicks.",
+                "Too lazy to catch the rulebreakers yourself?"
+            ]
+        },
+
+        "opt4" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        },
+
+        "opt5" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        },
+
+        "opt6" : {
+            "name" : "blank",
+            "dest" : "",
+            "descs" : [
+
+            ]
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+}

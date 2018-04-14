@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
 const ai = require("../functions/ai.js")
 const utils = require("../functions/circuit-utils.js");
-const home = require("./homeResponses.json")
+//const home = require("./homeResponses.json")
 const config = require("../config.json");
+
+const home = require("./homeScreens.json");
 
 
 
@@ -13,14 +15,81 @@ var activeHomes = {};
 
 
 
+function makeScreen(name, username) {
+    console.log("Making screen: " + name)
+
+    const newScreen = new Discord.RichEmbed();
+    newScreen.setColor(0x00AE86)
+
+    if (home[name] === undefined) return;
+
+    //Get the title of the screen.
+    if (home[name].title.constructor === Array) {
+        newScreen.setAuthor(utils.getRandomArray(home[name].title).replace("{user}", username))
+    } else {
+        newScreen.setAuthor(utils.getRandomArray(home[name].title).replace("{user}", username))
+    }
+
+    //Get the first field.
+    if (home[name].opt1.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt1.name, utils.getRandomArray(home[name].opt1.descs).replace("{user}", username), false)
+    }
+
+
+    if (home[name].opt2.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt2.name, utils.getRandomArray(home[name].opt2.descs).replace("{user}", username), false)
+    }
+
+
+    if (home[name].opt3.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt3.name, utils.getRandomArray(home[name].opt3.descs).replace("{user}", username), false)
+    }
+
+
+    if (home[name].opt4.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt4.name, utils.getRandomArray(home[name].opt4.descs).replace("{user}", username), false)
+    }
+
+
+    if (home[name].opt5.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt5.name, utils.getRandomArray(home[name].opt5.descs).replace("{user}", username), false)
+    }
+
+    if (home[name].opt6.name == "blank") {
+        newScreen.addBlankField(false);
+    } else {
+        newScreen.addField(home[name].opt6.name, utils.getRandomArray(home[name].opt6.descs).replace("{user}", username), false)
+    }
+
+
+
+
+    newScreen.addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion +" - developed by CircuitLord_");
+
+
+    return newScreen;
+
+}
 
 
 
 
 
 
-exports.initHomeScreen = (message) => {
-    console.log("homescreen running")
+
+exports.newHome = (message) => {
+    console.log("Making new home...");
+
     const username = message.author.username;
     const guildID = message.guild.id.toString();
     const userID = message.author.id.toString();
@@ -30,14 +99,19 @@ exports.initHomeScreen = (message) => {
 
     const userDatabaseID = (guildID + "-" + userID);
 
-    message.delete()
 
-    message.channel.send(exports.homeScreen(username)).then(async function(message) {
+    var screen = makeScreen("home", username);
+
+
+    //Init home screen.
+    message.channel.send(screen).then(async function(message) {
         const homeMessageID = message.id;
 
         activeHomes[homeMessageID] = {
-            "state" : "home"
+            "state" : "home",
+            "owner" : userID
         }
+
 
         await message.react("🏠");
         await message.react("⬅")
@@ -48,14 +122,13 @@ exports.initHomeScreen = (message) => {
         await message.react("\u0035\u20e3");
         await message.react("\u0036\u20e3");
         await message.react("❌");
-        
-        
+
+    });
 
 
-        const emojiIDArray = [`\u0031\u20e3`, `\u0032\u20e3`, `\u0033\u20e3`, `\u0034\u20e3`, `\u0035\u20e3`, `\u0036\u20e3`, `\u0037\u20e3`];
 
 
-    })
+
 
 
 
@@ -63,6 +136,78 @@ exports.initHomeScreen = (message) => {
 
 
 }
+
+
+exports.updateScreen = (messageReaction, user) => {
+    const messageID = messageReaction.message.id;
+    const reaction = messageReaction.emoji.name;
+    const message = messageReaction.message;
+    const username = messageReaction.message.author.username;
+
+    if (activeHomes[messageID] === null) return;
+    console.log(reaction)
+    messageReaction.remove(user);
+
+
+    if (reaction == "🏠") {
+        console.log("home")
+        message.edit(makeScreen("home", username));
+        activeHomes[messageID].state = "home"
+        return;
+    }
+
+    if (reaction == "❌") {
+        message.delete();
+        activeHomes[messageID] = null;
+        return;
+    }
+
+    if (reaction == "1⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt1.dest));
+
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt1.dest
+        return;
+    }
+
+    if (reaction == "2⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt2.dest));
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt2.dest
+        return;
+    }
+
+    if (reaction == "3⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt3.dest));
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt3.dest
+        return;
+    }
+
+    if (reaction == "4⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt4.dest));
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt4.dest
+        return;
+    }
+
+    if (reaction == "5⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt5.dest));
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt5.dest
+        return;
+    }
+
+    if (reaction == "6⃣") {
+        message.edit(makeScreen(home[activeHomes[messageID].state].opt6.dest));
+        activeHomes[messageID].state = home[activeHomes[messageID].state].opt6.dest
+        return;
+    }
+
+
+
+
+}
+
+
+
+
+
 
 
 

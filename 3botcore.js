@@ -44,7 +44,7 @@ client.on("messageReactionAdd", function(messageReaction, user) {
     const messageID = messageReaction.message.id;
 
 
-    home.newReaction(messageReaction, user);
+    home.updateScreen(messageReaction, user);
  
  
  });
@@ -180,7 +180,7 @@ client.on("message", function(message) {
 
     if (command.match("home")) {
         var commandFile = require("./commands/home.js");
-        commandFile.initHomeScreen(message);
+        commandFile.newHome(message);
         
     }
 
