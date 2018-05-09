@@ -1,0 +1,26 @@
+{
+    "prefix" : "-",
+
+    "modules" : {
+        "xp" : true,
+        "adminCommands" : {
+            "mute" : {
+                "canRun" : "Owners, Admins, and Mods."
+            },
+            "ban" : {
+                "canRun" : "Owners and Admins."
+            }
+        }
+    }
+
+
+
+
+
+    
+
+    
+
+
+
+}
