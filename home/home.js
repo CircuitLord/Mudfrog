@@ -492,8 +492,8 @@ exports.updateHome = (messageReaction, user) => {
     const reaction = messageReaction.emoji.name;
 
 
-
-    if (activeHomes[msg.id] === null) return;
+    console.log(activeHomes[msg.id])
+    if (activeHomes[msg.id] === undefined) return;
     messageReaction.remove(user);
 
     if (reaction == "❌") {

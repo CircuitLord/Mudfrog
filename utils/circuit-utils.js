@@ -3,6 +3,20 @@ const Discord = require("discord.js");
 
 //Misc
 
+
+exports.grab = (opt1, opt2, opt3, opt4, opt5, opt6) => {
+    var array = [];
+    if (opt1 !== undefined) array.push(opt1);
+    if (opt2 !== undefined) array.push(opt2);
+    if (opt3 !== undefined) array.push(opt3);
+    if (opt4 !== undefined) array.push(opt4);
+    if (opt5 !== undefined) array.push(opt5);
+    if (opt6 !== undefined) array.push(opt6);
+    return array[Math.floor(Math.random() * array.length)];
+
+}
+
+
 //Generates a random whole number between the min and max.
 exports.genRandomWhole = (min, max) => {
     return Math.random() * (min - max) + min;
@@ -36,21 +50,7 @@ exports.getRandomUserID = (message) => {
 
 //Enmap part of utils -------------------------------------------------------------------------------------
 
-const e = require('enmap');
-const EnmapLevel = require('enmap-level');
-
-var enmap = new e({ provider: new EnmapLevel({ name: 'serverUsersDB' }) });
-
-//Sets a value in the database.
-exports.eSet = (key, value) => {
-    enmap.set(key, value);
-}
-
-//Gets a value in the database.
-exports.eGet = (key) => {
-    return enmap.get(key);
-}
-
+/*
 //Maps all of a server's users for easy access.
 exports.mapUsersServer = (guildID) => {
     var users = enmap.map ((val, index, arr) => {
@@ -63,7 +63,7 @@ exports.mapUsersServer = (guildID) => {
     return users;
 
 }
-
+*/
 
 //End
 
