@@ -69,6 +69,23 @@ exports.mapUsersServer = (guildID) => {
 
 
 
+
+
+exports.getRoles = (msg) => {
+    var roles = [];
+
+    function findRoles(role, index, arr) {
+        roles.push(role.name);
+        return true;
+    }
+
+    msg.member.roles.every(findRoles)
+
+    return roles;
+}
+
+
+
 //XP Utils ----------------------------------------------------------------------------------------
 const levelConfig = require("../levelConfig.json");
 
