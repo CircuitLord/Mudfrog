@@ -1,26 +1,13 @@
 const Discord = require("discord.js");
 
 
-function grab(opt1, opt2, opt3, opt4, opt5, opt6) {
-    var array = [];
-    if (opt1 !== undefined) array.push(opt1);
-    if (opt2 !== undefined) array.push(opt2);
-    if (opt3 !== undefined) array.push(opt3);
-    if (opt4 !== undefined) array.push(opt4);
-    if (opt5 !== undefined) array.push(opt5);
-    if (opt6 !== undefined) array.push(opt6);
-    return array[Math.floor(Math.random() * array.length)];
-
-}
 
 
-
-
-exports.run = (msg, input) => {
+exports.run = (MUDFROG, msg, input) => {
 
     var opt1, opt2, opt3, opt4, opt5, opt6 = {};
 
-    opt1.desc = grab(
+    opt1.desc = MUDFROG.utils.grab(
         "Use fancy words to make me do cool things!",
         "This is where the magic happens.",
         "The best part.",
@@ -29,7 +16,7 @@ exports.run = (msg, input) => {
         "Lots of complex commands for you to enjoy."
     );
 
-    opt2.desc = grab(
+    opt2.desc = MUDFROG.utils.grab(
         "Break all my settings here.",
         "Tweak everything to your desire.",
         "Opening this voids your warrenty.",
@@ -48,11 +35,11 @@ exports.run = (msg, input) => {
         .addBlankField()
         .addBlankField()
         .setColor(0xb5111c)
-        .addField("----------------------------------------------------------------------", "_Mudfrog " + config.botVersion + " - developed by CircuitLord_")
+        .addField("----------------------------------------------------------------------", "_Mudfrog " + MUDFROG.config.botVersion + " - developed by CircuitLord_")
 
 
 
-    msg.edit(screen)
+    msg.edit(screen);
 
 
 

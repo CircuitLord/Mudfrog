@@ -17,6 +17,15 @@ exports.grab = (opt1, opt2, opt3, opt4, opt5, opt6) => {
 }
 
 
+exports.deleteDelayed = (msg, time) => {
+
+    setTimeout(function() {
+        msg.delete();
+    }, time);
+
+}
+
+
 //Generates a random whole number between the min and max.
 exports.genRandomWhole = (min, max) => {
     return Math.random() * (min - max) + min;

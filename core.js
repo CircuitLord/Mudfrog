@@ -15,6 +15,10 @@ MUDFROG.configTemp = require("./configTemplate.json")
 MUDFROG.db = require("./utils/database.js");
 MUDFROG.activeConfigs = {};
 
+MUDFROG.runCommand = function(MUDFROG, msg, command) {
+    require(`./commands/${command}.js`).run(MUDFROG, msg);
+}
+
 MUDFROG.loadConfigs = function() {
     function testGuildConfig(guild, index, arr) {
         if (MUDFROG.db.configGet(guild.id) === null) {
@@ -57,10 +61,9 @@ MUDFROG.on("message", function (msg) {
     msg.isCommand = false;
     if (msg.content.startsWith(MUDFROG.activeConfigs[msg.guild.id].prefix)) msg.isCommand = true;
 
-
-
-    //If msg is command, return.
+    //If msg is a command, return.
     if (msg.isCommand == false) return;
+
 
 
     //Useful addons to MSG object.
@@ -68,22 +71,33 @@ MUDFROG.on("message", function (msg) {
     msg.username = msg.author.username;
     msg.author.roles = MUDFROG.utils.getRoles(msg);
     msg.command = msg.content.substr(1).split(" ")[0].toLowerCase();
+    msg.args = msg.content.substr(1).split(" ").slice(1);
 
 
 
     //Command Handler.
     const commandList = [];
     fs.readdirSync("./commands/").forEach(file => {
-        commandList.push(file)
+        commandList.push(file);
     });
 
 
 
+    if (msg.command == "home") {
+        require("./home/homeCore.js").newHome(MUDFROG, msg);
+        return;
+    }
+
+    if (msg.command == "8" || msg.command == "8ball") {
+        MUDFROG.runCommand(MUDFROG, msg, "8");
+        return;
+    }
+
 
     //If custom command is not detected, fallback to automatic detection.
     if (commandList.includes(`${msg.command}.js`)) {
-        var commandFile = require(`./commands/${msg.command}.js`);
-        commandFile.run(MUDFROG, msg);
+        MUDFROG.runCommand(MUDFROG, msg, msg.command)
+        return;
     }
 
 });
