@@ -51,6 +51,19 @@ MUDFROG.on("ready", function (msg) {
 
 
 
+
+MUDFROG.on("messageReactionAdd", function(messageReaction, user) {
+
+    if (user.bot) return;
+
+    //Vote Code
+    require("./commands/vote.js").newReact(messageReaction, user);
+
+
+});
+
+
+
 MUDFROG.on("message", function (msg) {
 
     //Ignore DMs and Bots.
