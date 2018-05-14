@@ -88,6 +88,12 @@ MUDFROG.on("message", function (msg) {
         return;
     }
 
+    
+    if (msg.command == "vote") {
+        MUDFROG.runCommand(MUDFROG, msg, "vote");
+        return;
+    }
+
     if (msg.command == "8" || msg.command == "8ball") {
         MUDFROG.runCommand(MUDFROG, msg, "8");
         return;
