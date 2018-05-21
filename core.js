@@ -38,8 +38,6 @@ MUDFROG.reloadConfig = function(key) {
 }
 
 
-
-
 MUDFROG.on("ready", function (msg) {
 
     //Load server configs.
@@ -58,6 +56,13 @@ MUDFROG.on("messageReactionAdd", function(messageReaction, user) {
 
     //Vote Code
     require("./commands/vote.js").newReact(messageReaction, user);
+
+
+});
+
+MUDFROG.on("messageReactionRemove", async function(messageReaction, user) {
+
+    require("./commands/vote.js").reactRemoved(messageReaction, user);
 
 
 });

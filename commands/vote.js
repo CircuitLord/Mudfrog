@@ -3,7 +3,10 @@ const Discord = require("discord.js");
 
 var activeVotes = {};
 
-
+function remove(array, element) {
+    const index = array.indexOf(element);
+    array.splice(index, 1);
+}
 
 
 
@@ -86,10 +89,10 @@ exports.run = (MUDFROG, msg) => {
         screen.setDescription(`${screen.description}**5:** ${msg.args[6]}\n`);
     }
 
-
-    screen.setDescription(`${screen.description}React to the corrosponding emoji of whichever option you want to vote for.`)
+    var oldMsg = msg;
+    screen.setDescription(`${screen.description}React to the corrosponding emoji of whichever option you want to vote for.\nThe vote will last ${voteTime} minutes.`)
     .addField("----------------------------------------------------------------------", "_Mudfrog " + MUDFROG.config.botVersion + " - developed by CircuitLord_")
-    msg.delete();
+    //msg.delete();
     const emojiIDArray = [`\u0031\u20e3`, `\u0032\u20e3`, `\u0033\u20e3`, `\u0034\u20e3`, `\u0035\u20e3`, `\u0036\u20e3`, `\u0037\u20e3`, `\u0038\u20e3`, `\u0039\u20e3`];
     msg.channel.send(screen).then(async function(msg) {
         await msg.react(`\u0031\u20e3`);
@@ -99,7 +102,25 @@ exports.run = (MUDFROG, msg) => {
         if (i >= 4) await msg.react(`\u0034\u20e3`);
         if (i >= 5) await msg.react(`\u0035\u20e3`);
 
-        activeVotes[msg.id] = {active: true, owner: msg.author.id}
+        activeVotes[msg.id] = {active: true, owner: oldMsg.author.id, usersVoted: []}
+
+
+        setTimeout(function() {
+            var answers = (`**${oldMsg.args[2]}**\n`);
+            var reactions = msg.reactions;
+            console.log(reactions)
+
+            var voteCountArray = msg.reactions.map(g => g.count);
+    
+    
+            for (i = 0; i < oldMsg.args.length - 2; i++) {
+              answers = (answers + oldMsg.args[i + 2] + " got **" + (voteCountArray[i] - 1) + " votes!**\n");
+            }
+    
+            msg.channel.send(answers)
+
+
+        }, voteTime * 60000);
         
 
 
@@ -111,8 +132,16 @@ exports.run = (MUDFROG, msg) => {
 
 }
 
+//Remove a user from the voted list if they removed their vote manually.
+exports.reactRemoved = (messageReaction, user) => {
+    const msg = messageReaction.message;
+
+        remove(activeVotes[msg.id].usersVoted, user.id)
 
 
+
+
+}
 
 
 
@@ -123,11 +152,17 @@ exports.newReact = (messageReaction, user) => {
     const reaction = messageReaction.emoji.name;
 
 
-
     if (activeVotes[msg.id] === undefined) return;
 
-    messageReaction.remove(user);
 
+
+    if (activeVotes[msg.id].usersVoted.includes(user.id) == true) {
+        activeVotes[msg.id].usersVoted.push(user.id);
+        messageReaction.remove(user);
+        return;
+    }
+
+    activeVotes[msg.id].usersVoted.push(user.id);
 
 
 

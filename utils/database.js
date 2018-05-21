@@ -1,34 +1,48 @@
-const e = require('enmap');
+//const e = require('enmap');
+//const EnmapLevel = require('enmap-level');
+
+// Load Enmap
+const enmap = require('enmap');
+ 
+// Load EnmapRethink
 const EnmapLevel = require('enmap-level');
 
 
-var users = new e({ provider: new EnmapLevel({ name: 'usersDB' }) });
+const usersLevel = new EnmapLevel({ 
+    name: 'users'
+});
 
-var serverConfigs = new e({ provider: new EnmapLevel({ name: 'serverConfigs' }) });
+const configsLevel = new EnmapLevel({ 
+    name: 'configs'
+});
 
+
+
+const users = new enmap({ provider: usersLevel });
+const configs = new enmap({ provider: configsLevel });
 
 
 
 exports.set = (key, value) => {
-    enmap.set(key, value);
+    users.set(key, value);
 }
 
 exports.get = (key) => {
-    return enmap.get(key);
+    return users.get(key);
 }
 
 exports.configSet = (key, value) => {
-    serverConfigs.set(key, value);
+    configs.set(key, value);
 }
 
 exports.configGet = (key) => {
-    return serverConfigs.get(key);
+    return configs.get(key);
 }
 
 exports.loadConfigs = () => {
     var configData = {};
     var i = 0;
-    serverConfigs.map ((val, index, arr) => {
+    configs.map ((val, index, arr) => {
         i++;
         configData[index] = val;
     });
